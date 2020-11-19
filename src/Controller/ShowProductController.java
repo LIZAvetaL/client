@@ -2,14 +2,16 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Entity.BasketEntity;
+import Entity.ProductEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import Entity.ProductEntity;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ShowProductController {
@@ -33,7 +35,7 @@ public class ShowProductController {
     private TableColumn<ProductEntity, String> name;
 
     @FXML
-    private TableColumn<ProductEntity, Integer> price;
+    private TableColumn<ProductEntity, Double> price;
 
     @FXML
     private TableColumn<ProductEntity, Integer> amount;
@@ -51,16 +53,23 @@ public class ShowProductController {
     @FXML
     void initialize() {
         try {
-            List<ProductEntity> list = (List<ProductEntity>) Client.is.readObject();
-        ObservableList<ProductEntity> products = FXCollections.observableArrayList();
-        for (ProductEntity product:list){
-            products.add(product);
-        }
-        id.setCellValueFactory(new PropertyValueFactory<ProductEntity, Integer>("id_product"));
-        type.setCellValueFactory(new PropertyValueFactory<ProductEntity, String>("type"));
-        name.setCellValueFactory(new PropertyValueFactory<ProductEntity, String>("name"));
-        price.setCellValueFactory(new PropertyValueFactory<ProductEntity, Integer>("price"));
-        amount.setCellValueFactory(new PropertyValueFactory<ProductEntity, Integer>("amount"));
+            ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
+            ObservableList<ProductEntity> products = FXCollections.observableArrayList();
+            for (int i = 0; i < list.size(); i++) {
+                ProductEntity product=new ProductEntity();
+                String[] infoString = list.get(i).split(" ", 5);
+                product.setId_product(Integer.parseInt(infoString[0]));
+                product.setType(infoString[1]);
+                product.setName(infoString[2]);
+                product.setAmount(Integer.parseInt(infoString[3]));
+                product.setPrice(Double.parseDouble(infoString[4]));
+                products.add(product);
+            }
+        id.setCellValueFactory(new PropertyValueFactory<>("id_product"));
+        type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         Product.setItems(products);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +79,7 @@ public class ShowProductController {
 
         AddToBasket.setOnAction(event -> {
             String IdProductText = TextFieldProductChoice.getText().trim();
-            if (IdProductText.matches("\\d+")==false || id.equals(IdProductText)==false){
+            if (IdProductText.matches("\\d+")==false){
                LabelMessage.setText("Ошибка, повторите ввод.");
             }
             else{
@@ -83,6 +92,7 @@ public class ShowProductController {
                 }
                 if(message=="success")
                 LabelMessage.setText("Товар добавлен в корзину.");
+                else LabelMessage.setText("Ошибка.");
             }
         });
     }

@@ -2,39 +2,33 @@ package Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table(name = "product")
-public class ProductEntity implements Serializable {
-    @Id
-    @Column(name = "id_product")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idproduct;
-    @Column(name = "type")
+public class ProductEntity{
+
+    private int id_product;
     private String type;
-    @Column(name = "name")
-    private String nameproduct;
-    @Column(name = "amount")
+    private String name;
     private int amount;
-    @Column(name = "price")
-    private int price;
+    private double price;
 
-    public ProductEntity(){}
-
-    public ProductEntity(int idproduct, String type, String nameproduct, int amount, int price){
-        this.idproduct=idproduct;
+public ProductEntity(){}
+    public ProductEntity(int idproduct, String type, String nameproduct, int amount){
+        this.id_product=idproduct;
         this.type=type;
-        this.nameproduct=nameproduct;
+        this.name=nameproduct;
         this.amount=amount;
         this.price=price;
+
     }
 
-    public int getIdproduct() {
-        return idproduct;
+    public int getId_product() {
+        return id_product;
     }
 
-    public void setIdproduct(int idproduct) {
-        this.idproduct = idproduct;
+    public void setId_product(int idproduct) {
+        this.id_product = idproduct;
     }
 
 
@@ -47,12 +41,12 @@ public class ProductEntity implements Serializable {
     }
 
 
-    public String getNameproduct() {
-        return nameproduct;
+    public String getName() {
+        return name;
     }
 
-    public void setNameproduct(String nameproduct) {
-        this.nameproduct = nameproduct;
+    public void setName(String nameproduct) {
+        this.name = nameproduct;
     }
 
 
@@ -65,37 +59,11 @@ public class ProductEntity implements Serializable {
     }
 
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ProductEntity that = (ProductEntity) o;
-
-        if (idproduct != that.idproduct) return false;
-        if (amount != that.amount) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (nameproduct != null ? !nameproduct.equals(that.nameproduct) : that.nameproduct != null) return false;
-        if (price!= that.price) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idproduct;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (nameproduct != null ? nameproduct.hashCode() : 0);
-        result = 31 * result + amount;
-        result = 31 * result + price;
-        return result;
     }
 }

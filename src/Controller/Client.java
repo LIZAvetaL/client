@@ -14,7 +14,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client extends Application {
-    public static String clientMessage;
     public static Socket socket;
     public static ObjectOutputStream os;
     public static ObjectInputStream is;
@@ -37,7 +36,8 @@ public class Client extends Application {
             System.err.println("I/О thread error" + var2);
         }
     }
-    public static void setId_user(int id){id_user=id;}
+    public static void setId_user(int id){
+        id_user=id;}
     public static String getId_user(){
         return Integer.toString(id_user);}
 

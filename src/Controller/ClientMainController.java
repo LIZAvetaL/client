@@ -41,6 +41,15 @@ public class ClientMainController {
             }
             openNewScene("/Window/ShowProductWindow.fxml");
         });
+        Basket.setOnAction(actionEvent -> {
+            String clientMessage = "Basket,ShowBasket";
+            try {
+                Client.os.writeObject(clientMessage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            openNewScene("/Window/ShowBasketWindow.fxml");
+        });
 
     }
     public void openNewScene(String window)
