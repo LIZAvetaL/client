@@ -7,7 +7,7 @@
    <children>
       <Button fx:id="Basket" layoutX="297.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Корзина" />
       <Button fx:id="Product" layoutX="150.0" layoutY="136.0" mnemonicParsing="false" text="Посмотреть товар" />
-      <Button fx:id="HstorOrdr" layoutX="150.0" layoutY="200.0" mnemonicParsing="false" text="История заказов" />
+      <Button fx:id="HistoryOrder" layoutX="150.0" layoutY="200.0" mnemonicParsing="false" text="История заказов" />
       <Button fx:id="backButton" layoutX="297.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Назад" />
    </children>
 </AnchorPane>

@@ -33,22 +33,13 @@ public class ClientMainController {
     @FXML
     void initialize() {
         Product.setOnAction(event -> {
-            String clientMessage = "Product,ShowProduct";
-            try {
-                Client.os.writeObject(clientMessage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             openNewScene("/Window/ShowProductWindow.fxml");
         });
         Basket.setOnAction(actionEvent -> {
-            String clientMessage = "Basket,ShowBasket";
-            try {
-                Client.os.writeObject(clientMessage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             openNewScene("/Window/ShowBasketWindow.fxml");
+        });
+        HistoryOrder.setOnAction(actionEvent -> {
+            openNewScene("/Window/HistoryOfOrderWindow.fxml");
         });
 
     }

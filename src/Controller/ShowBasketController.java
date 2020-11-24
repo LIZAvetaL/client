@@ -50,6 +50,8 @@ public class ShowBasketController {
     private Button deleteBasketButton;
     @FXML
     private Button backButton;
+    @FXML
+    private Button OrderButton;
 
     @FXML
     void initialize() {
@@ -71,11 +73,24 @@ public class ShowBasketController {
             if (message.equals("success"))
                 showBasket();
         });
+        OrderButton.setOnAction(actionEvent -> {
+            String  message="Order,addToOrder,"+Client.getId_user();
+            try {
+                Client.os.writeObject(message);
+                message= (String) Client.is.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (message.equals("success"))
+            openOrderWindow();
+        });
 
     }
 
     public void showBasket() {
         try {
+            String clientMessage = "Basket,ShowBasket,"+Client.getId_user();
+            Client.os.writeObject(clientMessage);
             ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
             ObservableList<BasketEntity> baskets = FXCollections.observableArrayList();
             for (int i = 0; i < list.size(); i++) {
@@ -115,6 +130,19 @@ public class ShowBasketController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+    public void openOrderWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/OrderWindow.fxml"));
+        Scene newScene;
+        try {
+            newScene = new Scene(loader.load());
+        } catch (IOException ex) {
+            return;
+        }
+        Stage inputStage = new Stage();
+        inputStage.initOwner(OrderButton.getScene().getWindow());
+        inputStage.setScene(newScene);
+        inputStage.show();
     }
 }
 

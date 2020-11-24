@@ -53,6 +53,8 @@ public class ShowProductController {
     private Label LabelMessage;
     @FXML
     private Button backButton;
+    @FXML
+    private TextField AmountTF;
 
 
     @FXML
@@ -63,19 +65,20 @@ public class ShowProductController {
         });
         AddToBasket.setOnAction(event -> {
             String IdProductText = TextFieldProductChoice.getText().trim();
-            if (IdProductText.matches("\\d+")==false){
+            String amountProductText=AmountTF.getText().trim();
+            if (IdProductText.matches("\\d+")==false || amountProductText.matches("\\d+")==false || Integer.parseInt(amountProductText)<0)
                LabelMessage.setText("Ошибка, повторите ввод.");
-            }
             else{
-                String message="Basket,addToBasket,"+IdProductText+","+Client.getId_user();
+                String message="Basket,addToBasket,"+IdProductText+","+amountProductText+","+Client.getId_user();
                 try {
                     Client.os.writeObject(message);
                     message= (String) Client.is.readObject();
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                if(message.equals("success"))
+                if(message.equals("success")){
                 LabelMessage.setText("Товар добавлен в корзину.");
+                showProduct();}
                 else LabelMessage.setText("Ошибка.");
 
             }
@@ -83,6 +86,8 @@ public class ShowProductController {
     }
     public void showProduct(){
         try {
+            String clientMessage = "Product,ShowProduct";
+            Client.os.writeObject(clientMessage);
             ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
             for (int i = 0; i < list.size(); i++) {
