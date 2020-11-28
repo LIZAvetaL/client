@@ -78,15 +78,22 @@ public class AdminProductController {
             openNewScene("/Window/AdminMainWindow.fxml");
         } );
         addButton.setOnAction(actionEvent -> {
-            openAddProductWin();
+            openSecondWin("/Window/AddProductWindow.fxml");
         });
         editButton.setOnAction(actionEvent -> {
-
+            String deleteId= idTF.getText();
+            String message="Product,editProduct,"+deleteId;
+            try {
+                Client.os.writeObject(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            openSecondWin("/Window/EditProductWindow.fxml");
         });
     }
 
-    private void openAddProductWin() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/AddProductWindow.fxml"));
+    private void openSecondWin(String win) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(win));
         Scene newScene;
         try {
             newScene = new Scene(loader.load());

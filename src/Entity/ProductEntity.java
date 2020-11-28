@@ -2,25 +2,28 @@ package Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ProductEntity{
+
+
+public class ProductEntity implements Serializable{
 
     private int id_product;
     private String type;
     private String name;
+
     private int amount;
+
     private double price;
 
-public ProductEntity(){}
-    public ProductEntity(int idproduct, String type, String nameproduct, int amount){
-        this.id_product=idproduct;
+
+
+    public ProductEntity(){}
+
+    public ProductEntity( String type, String nameproduct, int amount, double price){
         this.type=type;
         this.name=nameproduct;
         this.amount=amount;
         this.price=price;
-
     }
 
     public int getId_product() {
@@ -66,4 +69,22 @@ public ProductEntity(){}
     public void setPrice(double price) {
         this.price = price;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductEntity that = (ProductEntity) o;
+
+        if (id_product != that.id_product) return false;
+        if (amount != that.amount) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (price!= that.price) return false;
+
+        return true;
+    }
+
 }

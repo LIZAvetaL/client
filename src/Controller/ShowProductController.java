@@ -2,7 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -88,7 +88,7 @@ public class ShowProductController {
         try {
             String clientMessage = "Product,ShowProduct";
             Client.os.writeObject(clientMessage);
-            ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
+            /*ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
             for (int i = 0; i < list.size(); i++) {
                 ProductEntity product=new ProductEntity();
@@ -99,7 +99,10 @@ public class ShowProductController {
                 product.setAmount(Integer.parseInt(infoString[3]));
                 product.setPrice(Double.parseDouble(infoString[4]));
                 products.add(product);
-            }
+            }*/
+            List<ProductEntity>list= (List<ProductEntity>) Client.is.readObject();
+            ObservableList<ProductEntity> products = FXCollections.observableArrayList();
+
             id.setCellValueFactory(new PropertyValueFactory<>("id_product"));
             type.setCellValueFactory(new PropertyValueFactory<>("type"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));

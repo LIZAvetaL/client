@@ -17,10 +17,10 @@
             <TableColumn fx:id="price" prefWidth="87.33328247070312" text="Цена" />
         </columns>
       </TableView>
-      <Button fx:id="addButton" layoutX="32.0" layoutY="302.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="249.0" text="Добавить товар" />
+      <Button fx:id="addButton" layoutX="306.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="249.0" text="Добавить товар" />
       <Button fx:id="backButton" layoutX="525.0" layoutY="7.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="61.0" text="Назад" />
-      <Button fx:id="editButton" layoutX="32.0" layoutY="259.0" mnemonicParsing="false" text="Редактировать товар" />
+      <Button fx:id="editButton" layoutX="255.0" layoutY="259.0" mnemonicParsing="false" text="Редактировать товар" />
       <Button fx:id="deleteButton" layoutX="461.0" layoutY="259.0" mnemonicParsing="false" text="Удалить товар" />
-      <TextField fx:id="idTF" layoutX="503.0" layoutY="302.0" prefHeight="25.0" prefWidth="53.0" promptText="id" />
+      <TextField fx:id="idTF" layoutX="396.0" layoutY="259.0" prefHeight="25.0" prefWidth="53.0" promptText="id" />
    </children>
 </AnchorPane>

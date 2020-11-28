@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -36,7 +37,24 @@ public class AddProductController {
 
     @FXML
     void initialize() {
-
+        addButton.setOnAction(actionEvent -> {
+        String Type=type.getValue();
+        String Name=name.getText().trim();
+        String Amount=amount.getText().trim();
+        String Price=price.getText().trim();
+        if(Type==null || Name==null ||Amount==null||Price==null || Amount.matches("\\d+")==false|| Price.matches("\\d+")==false) MessageLabel.setText("Ошибка.Повторите ввод");
+        else {
+            String message ="Product,addProduct,"+ Type + "," + Name + "," + Amount + "," + Price;
+            try {
+                Client.os.writeObject(message);
+                 message= (String) Client.is.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (message.equals("success"))MessageLabel.setText("Товар добавлен");
+            else MessageLabel.setText("Ошибка добавления");
+        }
+        });
     }
 }
 
