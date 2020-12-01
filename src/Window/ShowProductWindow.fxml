@@ -11,10 +11,10 @@
    <children>
       <TableView fx:id="Product" layoutX="74.0" layoutY="14.0" prefHeight="243.0" prefWidth="452.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="68.0000228881836" text="id" />
-          <TableColumn fx:id="type" prefWidth="115.33329772949219" text="Тип" />
-            <TableColumn fx:id="name" prefWidth="43.33331298828125" text="Название" />
-            <TableColumn fx:id="price" prefWidth="132.0" text="Цена" />
+          <TableColumn fx:id="id" prefWidth="48.66668701171875" text="id" />
+          <TableColumn fx:id="type" prefWidth="112.66663360595703" text="Тип" />
+            <TableColumn fx:id="name" prefWidth="124.66667175292969" text="Название" />
+            <TableColumn fx:id="price" prefWidth="74.0" text="Цена" />
             <TableColumn fx:id="amount" prefWidth="93.33328247070312" text="Количество" />
         </columns>
       </TableView>

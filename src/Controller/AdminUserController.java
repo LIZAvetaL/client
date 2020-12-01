@@ -81,16 +81,13 @@ public class AdminUserController {
         ObservableList<UsersEntity> users = FXCollections.observableArrayList();
         for (UsersEntity user:list)
             users.add(user);
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id_user"));
         login.setCellValueFactory(new PropertyValueFactory<>("login"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         table.setItems(users);
-    } catch (
-    IOException e) {
-        e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
+    } catch (IOException |ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     public void openNewScene(String window){
         backButton.getScene().getWindow().hide();

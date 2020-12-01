@@ -3,6 +3,8 @@ package Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Server.Model.ProductEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -37,14 +39,12 @@ public class EditProductController {
 
     @FXML
     void initialize() {
-        String message = "";
         try {
-            message = (String) Client.is.readObject();
-            String[] info=message.split(",",4);
-            type.setValue(info[0]);
-            name.setText(info[1]);
-            amount.setText(info[2]);
-            price.setText(info[3]);
+            ProductEntity product = (ProductEntity) Client.is.readObject();
+            type.setValue(product.getType());
+            name.setText(product.getName());
+            amount.setText(String.valueOf(product.getAmount()));
+            price.setText(String.valueOf(product.getPrice()));
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

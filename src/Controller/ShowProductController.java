@@ -66,7 +66,7 @@ public class ShowProductController {
         AddToBasket.setOnAction(event -> {
             String IdProductText = TextFieldProductChoice.getText().trim();
             String amountProductText=AmountTF.getText().trim();
-            if (IdProductText.matches("\\d+")==false || amountProductText.matches("\\d+")==false || Integer.parseInt(amountProductText)<0)
+            if (IdProductText.matches("\\d+")==false || amountProductText.matches("\\d+")==false || Integer.parseInt(amountProductText)<0 || Integer.parseInt(IdProductText)<0)
                LabelMessage.setText("Ошибка, повторите ввод.");
             else{
                 String message="Basket,addToBasket,"+IdProductText+","+amountProductText+","+Client.getId_user();
@@ -88,23 +88,10 @@ public class ShowProductController {
         try {
             String clientMessage = "Product,ShowProduct";
             Client.os.writeObject(clientMessage);
-            /*ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
-            ObservableList<ProductEntity> products = FXCollections.observableArrayList();
-            for (int i = 0; i < list.size(); i++) {
-                ProductEntity product=new ProductEntity();
-                String[] infoString = list.get(i).split(" ", 5);
-                product.setId_product(Integer.parseInt(infoString[0]));
-                product.setType(infoString[1]);
-                product.setName(infoString[2]);
-                product.setAmount(Integer.parseInt(infoString[3]));
-                product.setPrice(Double.parseDouble(infoString[4]));
-                products.add(product);
-            }*/
             List<ProductEntity>list= (List<ProductEntity>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
             for (ProductEntity product:list)
                 products.add(product);
-
             id.setCellValueFactory(new PropertyValueFactory<>("id_product"));
             type.setCellValueFactory(new PropertyValueFactory<>("type"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));

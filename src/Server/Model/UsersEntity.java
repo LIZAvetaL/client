@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class UsersEntity implements Serializable {
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 1L;
     private int id_user;
     private String login;
     private String password;

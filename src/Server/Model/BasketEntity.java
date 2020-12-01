@@ -1,15 +1,10 @@
 package Server.Model;
 
-
-
-
 import java.io.Serializable;
-import java.util.Objects;
-
 
 public class BasketEntity implements Serializable{
     private static final long serialVersionUID = 1L;
-    private int id;
+    private int idBasket;
     private int amount;
     private double price;
     private ProductEntity product;
@@ -18,11 +13,11 @@ public class BasketEntity implements Serializable{
     public BasketEntity(){}
 
     public int getId() {
-        return id;
+        return idBasket;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idBasket = id;
     }
 
     public void setAmount(int amount) {

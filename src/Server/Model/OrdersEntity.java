@@ -1,7 +1,8 @@
 package Server.Model;
 
 
-public class OrderEntity {
+public class OrdersEntity {
+    private static final long serialVersionUID = 1L;
     private int orderNumber;
     private double totalPrice;
     private String status;
