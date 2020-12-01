@@ -4,9 +4,10 @@ package Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import Entity.BasketEntity;
+import Server.Model.BasketEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -89,7 +90,7 @@ public class ShowBasketController {
         try {
             String clientMessage = "Basket,ShowBasket,"+Client.getId_user();
             Client.os.writeObject(clientMessage);
-            ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
+            /*ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
             ObservableList<BasketEntity> baskets = FXCollections.observableArrayList();
             for (int i = 0; i < list.size(); i++) {
                 BasketEntity basket = new BasketEntity();
@@ -99,7 +100,11 @@ public class ShowBasketController {
                 basket.setPrice(Double.parseDouble(infoString[2]));
                 basket.setId(Integer.parseInt(infoString[3]));
                 baskets.add(basket);
-            }
+            }*/
+            List<BasketEntity> list=(List<BasketEntity>)Client.is.readObject();
+            ObservableList<BasketEntity> baskets = FXCollections.observableArrayList();
+            for (BasketEntity basket :list)
+                baskets.add(basket);
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
             price.setCellValueFactory(new PropertyValueFactory<>("price"));
             amount.setCellValueFactory(new PropertyValueFactory<>("amount"));

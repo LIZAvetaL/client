@@ -1,17 +1,20 @@
-package Entity;
+package Server.Model;
 
 
 
-import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 
-public class BasketEntity {
+public class BasketEntity implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int id;
     private int amount;
     private double price;
+    private ProductEntity product;
     private String name;
+
     public BasketEntity(){}
 
     public int getId() {
@@ -31,11 +34,11 @@ public class BasketEntity {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = product.getName();
     }
 
     public String getName() {
-        return name;
+        return product.getName();
     }
 
     public double getPrice() {
@@ -44,5 +47,13 @@ public class BasketEntity {
 
     public int getAmount() {
         return amount;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
     }
 }

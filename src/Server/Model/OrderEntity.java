@@ -1,4 +1,4 @@
-package Entity;
+package Server.Model;
 
 
 public class OrderEntity {

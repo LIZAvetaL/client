@@ -42,6 +42,10 @@ public class ClientMainController {
             openNewScene("/Window/HistoryOfOrderWindow.fxml");
         });
 
+        backButton.setOnAction(actionEvent -> {
+            openNewScene("/Window/LogInWindow.fxml");
+        });
+
     }
     public void openNewScene(String window)
     {

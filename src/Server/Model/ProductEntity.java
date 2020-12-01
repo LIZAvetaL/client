@@ -1,12 +1,11 @@
-package Entity;
+package Server.Model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 
 
 public class ProductEntity implements Serializable{
-
+    private static final long serialVersionUID = 1L;
     private int id_product;
     private String type;
     private String name;

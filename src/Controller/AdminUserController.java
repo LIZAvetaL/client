@@ -3,9 +3,10 @@ package Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import Entity.UsersEntity;
+import Server.Model.UsersEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -76,16 +77,10 @@ public class AdminUserController {
         try {
         String clientMessage = "User,showUser";
         Client.os.writeObject(clientMessage);
-        ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
+        List<UsersEntity> list = (List<UsersEntity>) Client.is.readObject();
         ObservableList<UsersEntity> users = FXCollections.observableArrayList();
-        for (int i = 0; i < list.size(); i++) {
-            UsersEntity user = new UsersEntity();
-            String[] infoString = list.get(i).split(",", 3);
-            user.setIdUser(Integer.parseInt(infoString[0]));
-            user.setLogin(infoString[1]);
-            user.setPassword(infoString[2]);
+        for (UsersEntity user:list)
             users.add(user);
-        }
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         login.setCellValueFactory(new PropertyValueFactory<>("login"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));

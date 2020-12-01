@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-import Entity.ProductEntity;
+import Server.Model.ProductEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -102,6 +102,8 @@ public class ShowProductController {
             }*/
             List<ProductEntity>list= (List<ProductEntity>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
+            for (ProductEntity product:list)
+                products.add(product);
 
             id.setCellValueFactory(new PropertyValueFactory<>("id_product"));
             type.setCellValueFactory(new PropertyValueFactory<>("type"));

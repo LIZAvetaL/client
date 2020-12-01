@@ -13,8 +13,8 @@
         <columns>
           <TableColumn fx:id="id" prefWidth="68.0000228881836" text="id" />
           <TableColumn fx:id="type" prefWidth="115.33329772949219" text="Тип" />
-            <TableColumn fx:id="name" prefWidth="113.33332824707031" text="Название" />
-            <TableColumn fx:id="price" prefWidth="62.0" text="Цена" />
+            <TableColumn fx:id="name" prefWidth="43.33331298828125" text="Название" />
+            <TableColumn fx:id="price" prefWidth="132.0" text="Цена" />
             <TableColumn fx:id="amount" prefWidth="93.33328247070312" text="Количество" />
         </columns>
       </TableView>

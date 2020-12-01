@@ -1,24 +1,27 @@
-package Entity;
+package Server.Model;
 
-public class UsersEntity{
+import java.io.Serializable;
+import java.util.List;
 
-    private int id;
+
+public class UsersEntity implements Serializable {
+    private static final long serialVersionUID = 2L;
+    private int id_user;
     private String login;
     private String password;
 
     public UsersEntity(){}
-    public UsersEntity(int idUser, String login, String password){
-        this.id=idUser;
+    public UsersEntity( String login, String password){
         this.password=password;
         this.login=login;
     }
 
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return id_user;
     }
 
     public void setIdUser(int idUser) {
-        this.id = idUser;
+        this.id_user = idUser;
     }
 
 
@@ -38,6 +41,5 @@ public class UsersEntity{
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }
