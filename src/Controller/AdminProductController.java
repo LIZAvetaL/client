@@ -81,7 +81,8 @@ public class AdminProductController {
             openSecondWin("/Window/AddProductWindow.fxml");
         });
         editButton.setOnAction(actionEvent -> {
-            String deleteId= idTF.getText();
+            String deleteId= idTF.getText().trim();
+            if (deleteId!=null || Integer.parseInt(deleteId)>0){
             String message="Product,editProduct,"+deleteId;
             try {
                 Client.os.writeObject(message);
@@ -89,6 +90,7 @@ public class AdminProductController {
                 e.printStackTrace();
             }
             openSecondWin("/Window/EditProductWindow.fxml");
+            }
         });
     }
 

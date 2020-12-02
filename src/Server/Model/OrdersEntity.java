@@ -7,6 +7,7 @@ public class OrdersEntity {
     private double totalPrice;
     private String status;
 
+    public OrdersEntity(){}
     public int getOrderNumber() {
         return orderNumber;
     }

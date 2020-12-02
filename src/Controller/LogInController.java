@@ -61,7 +61,6 @@ public class LogInController {
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-
                 if (message.equals("fail"))
                     CautionLabel.setText("Такого пользователя не существует!");
                 else {

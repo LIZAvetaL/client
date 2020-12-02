@@ -20,16 +20,10 @@ public class EditProductController {
     private URL location;
 
     @FXML
-    private ComboBox<String> type;
+    private ComboBox<String> editChoice;
 
     @FXML
-    private TextField name;
-
-    @FXML
-    private TextField price;
-
-    @FXML
-    private TextField amount;
+    private TextField editTF;
 
     @FXML
     private Button editButton;
@@ -38,16 +32,31 @@ public class EditProductController {
     private Label MessageLabel;
 
     @FXML
-    void initialize() {
-        try {
-            ProductEntity product = (ProductEntity) Client.is.readObject();
-            type.setValue(product.getType());
-            name.setText(product.getName());
-            amount.setText(String.valueOf(product.getAmount()));
-            price.setText(String.valueOf(product.getPrice()));
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    void initialize() throws IOException, ClassNotFoundException {
+        ProductEntity product = (ProductEntity) Client.is.readObject();
+        ProductEntity finalProduct = product;
+        editButton.setOnAction(actionEvent -> {
+            String edit=editTF.getText().trim();
+            if(edit!=null){
+                try {
+                 switch (editChoice.getValue()){
+                    case "Модель": finalProduct.setName(edit);
+                        Client.os.writeObject(finalProduct);
+                        break;
+                    case "Цена":finalProduct.setPrice(Double.parseDouble(edit));
+                        Client.os.writeObject(finalProduct);
+                        break;
+                    case "Количество":finalProduct.setAmount(Integer.parseInt(edit));
+                        Client.os.writeObject(finalProduct);
+                    }
+                    String message= (String) Client.is.readObject();
+                    if (message.equals("success")) MessageLabel.setText("Товар отредактирован");
+                    else MessageLabel.setText("Ошибка.");
+                 } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
     }
