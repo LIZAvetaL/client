@@ -1,9 +1,8 @@
 package Controller;
 
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,7 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class ShowBasketController {
+public class ShowBasketController implements NewScreen{
 
     @FXML
     private ResourceBundle resources;
@@ -55,7 +54,7 @@ public class ShowBasketController {
     void initialize() {
         showBasket();
         backButton.setOnAction(actionEvent -> {
-        openNewScene("/Window/ClientMainWindow.fxml");
+            closeAndOpenScene("/Window/ClientMainWindow.fxml");
         });
         deleteBasketButton.setOnAction(actionEvent -> {
             String idBasket=deleteIdTF.getText().trim();
@@ -82,10 +81,35 @@ public class ShowBasketController {
             }
             if (message.equals("success")) {
                 openOrderWindow();
+                saveFile();
+                message="Basket,deleteAll,"+Client.getId_user();
+                try {
+                    Client.os.writeObject(message);
+                    message= (String) Client.is.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 showBasket();
             }
         });
 
+    }
+
+    private void saveFile() {
+        FileOutputStream f = null;
+        try {
+            f = new FileOutputStream(new File("myOrder.txt"));
+        for (BasketEntity basket: table.getItems()) {
+            String text="Модель: " + basket.getName() + "Цена: " + basket.getPrice() + "Количество: " + basket.getAmount()+" \r\n";
+            byte[] buffer = text.getBytes();
+            f.write(buffer, 0, buffer.length);
+        }
+        f.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showBasket() {
@@ -108,22 +132,9 @@ public class ShowBasketController {
         }
     }
 
-    public void openNewScene(String window) {
+    public void closeAndOpenScene(String window) {
         backButton.getScene().getWindow().hide();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
     public void openOrderWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/OrderWindow.fxml"));

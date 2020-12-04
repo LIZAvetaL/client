@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class ClientMainController {
+public class ClientMainController implements NewScreen{
 
     @FXML
     private ResourceBundle resources;
@@ -26,6 +26,8 @@ public class ClientMainController {
 
     @FXML
     private Button HistoryOrder;
+    @FXML
+    private Button reviewButton;
 
     @FXML
     private Button backButton;
@@ -33,37 +35,28 @@ public class ClientMainController {
     @FXML
     void initialize() {
         Product.setOnAction(event -> {
-            openNewScene("/Window/ShowProductWindow.fxml");
+            closeAndOpenScene("/Window/ShowProductWindow.fxml");
         });
         Basket.setOnAction(actionEvent -> {
-            openNewScene("/Window/ShowBasketWindow.fxml");
+            closeAndOpenScene("/Window/ShowBasketWindow.fxml");
         });
         HistoryOrder.setOnAction(actionEvent -> {
-            openNewScene("/Window/HistoryOfOrderWindow.fxml");
+            closeAndOpenScene("/Window/HistoryOfOrderWindow.fxml");
+        });
+        reviewButton.setOnAction(actionEvent -> {
+            closeAndOpenScene("/Window/ReviewsWindow.fxml");
         });
 
+
         backButton.setOnAction(actionEvent -> {
-            openNewScene("/Window/LogInWindow.fxml");
+            closeAndOpenScene("/Window/LogInWindow.fxml");
         });
 
     }
-    public void openNewScene(String window)
+    public void closeAndOpenScene(String window)
     {
         Product.getScene().getWindow().hide();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
 }
 

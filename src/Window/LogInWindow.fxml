@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B4045F;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
     <children>
         <AnchorPane layoutX="15.0" layoutY="96.0" prefHeight="290.0" prefWidth="570.0" style="-fx-background-color: #ECCEF5;">
             <children>
@@ -48,6 +48,8 @@
                         <Font name="Century Gothic" size="11.0" />
                     </font>
                 </Button>
+            <Button fx:id="dark" layoutX="14.0" layoutY="251.0" mnemonicParsing="false" text="Темная" />
+            <Button fx:id="light" layoutX="14.0" layoutY="223.0" mnemonicParsing="false" text="Светлая" />
             </children>
         </AnchorPane>
         <Label layoutX="38.0" layoutY="14.0" text="Добро пожаловать!" textAlignment="CENTER" textFill="#3e2e3e">

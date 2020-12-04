@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class AdminUserController {
+public class AdminUserController implements NewScreen{
 
     @FXML
     private ResourceBundle resources;
@@ -69,7 +69,7 @@ public class AdminUserController {
             openAddAdminWindow();
         });
         backButton.setOnAction(actionEvent ->{
-            openNewScene("/Window/AdminMainWindow.fxml");
+            closeAndOpenScene("/Window/AdminMainWindow.fxml");
         } );
     }
 
@@ -89,19 +89,9 @@ public class AdminUserController {
             e.printStackTrace();
         }
     }
-    public void openNewScene(String window){
+    public void closeAndOpenScene(String window){
         backButton.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
     public void openAddAdminWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/AddAdminWindow.fxml"));

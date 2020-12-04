@@ -19,7 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class HistoryOfOrderController {
+public class HistoryOfOrderController implements NewScreen {
 
     @FXML
     private ResourceBundle resources;
@@ -46,7 +46,7 @@ public class HistoryOfOrderController {
     void initialize() {
        showOrder();
        BackButton.setOnAction(actionEvent ->{
-           openNewScene("/Window/ClientMainWindow.fxml");
+           closeAndOpenScene("/Window/ClientMainWindow.fxml");
        });
     }
 
@@ -66,22 +66,9 @@ public class HistoryOfOrderController {
             e.printStackTrace();
         }
     }
-    public void openNewScene(String window) {
+    public void closeAndOpenScene(String window) {
         BackButton.getScene().getWindow().hide();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
 }
 

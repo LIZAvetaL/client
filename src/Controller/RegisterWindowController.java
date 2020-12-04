@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterWindowController {
+public class RegisterWindowController implements NewScreen {
 
     @FXML
     private ResourceBundle resources;
@@ -49,7 +49,7 @@ public class RegisterWindowController {
                     String clientMessage = "User,addClient,"+ login + "," + Password;
                         Client.os.writeObject(clientMessage);
                         mes= (String) Client.is.readObject();;
-                    openNewScene("/Window/LogInWindow.fxml");
+                    closeAndOpenScene("/Window/LogInWindow.fxml");
                 }
                 else
                 {
@@ -66,21 +66,9 @@ public class RegisterWindowController {
 
     }
 
-    public void openNewScene(String window)
+    public void closeAndOpenScene(String window)
     {
         SignUpButton.getScene().getWindow().hide();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
 }

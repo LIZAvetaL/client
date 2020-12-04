@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class AdminMainController {
+public class AdminMainController implements NewScreen {
 
     @FXML
     private ResourceBundle resources;
@@ -33,29 +33,22 @@ public class AdminMainController {
     @FXML
     void initialize() {
         userButton.setOnAction(actionEvent -> {
-            openNewScene("/Window/AdminUserWindow.fxml");
+            closeAndOpenScene("/Window/AdminUserWindow.fxml");
         });
         ProductButton.setOnAction(actionEvent -> {
-            openNewScene("/Window/AdminProductWindow.fxml");
+            closeAndOpenScene("/Window/AdminProductWindow.fxml");
+        });
+        OrderButton.setOnAction(actionEvent -> {
+            closeAndOpenScene("/Window/AdminOrderWindow.fxml");
+        });
+        statisticsButton.setOnAction(actionEvent -> {
+            closeAndOpenScene("/Window/Statistics.fxml");
         });
     }
-    public void openNewScene(String window)
-    {
+    public void closeAndOpenScene(String window){
         userButton.getScene().getWindow().hide();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
+
 }
 

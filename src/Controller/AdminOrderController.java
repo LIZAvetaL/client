@@ -18,7 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class AdminOrderController {
+public class AdminOrderController implements NewScreen {
 
     @FXML
     private ResourceBundle resources;
@@ -56,10 +56,11 @@ public class AdminOrderController {
     void initialize() {
         showOrder();
         BackButton.setOnAction(actionEvent -> {
-            openNewScene("/Window/AdminMainWindow.fxml");
+            closeAndOpenScene("/Window/AdminMainWindow.fxml");
         });
         changeButton.setOnAction(actionEvent -> {
             changeStatus();
+            showOrder();
         });
     }
 
@@ -90,7 +91,6 @@ public class AdminOrderController {
             for(OrdersEntity order:list)
                 orders.add(order);
             OrderNumber.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
-            Amount.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
             Price.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
             Status.setCellValueFactory(new PropertyValueFactory<>("status"));
             Table.setItems(orders);
@@ -98,21 +98,8 @@ public class AdminOrderController {
             e.printStackTrace();
         }
     }
-    public void openNewScene(String window) {
+    public void closeAndOpenScene(String window) {
         BackButton.getScene().getWindow().hide();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        openNewScene(window);
     }
 }

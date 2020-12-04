@@ -1,7 +1,9 @@
 package Server.Model;
 
 
-public class OrdersEntity {
+import java.io.Serializable;
+
+public class OrdersEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     private int orderNumber;
     private double totalPrice;

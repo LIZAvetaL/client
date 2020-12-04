@@ -16,7 +16,7 @@ public class UsersEntity implements Serializable {
         this.login=login;
     }
 
-    public int getIdUser() {
+    public int getId_user() {
         return id_user;
     }
 

@@ -19,6 +19,7 @@ public class Client extends Application {
     public static ObjectInputStream is;
     public static boolean connected = false;
     private static int id_user=0;
+    private static String tema="/Window/light.css";
 
 
     public static void Connect()
@@ -40,6 +41,14 @@ public class Client extends Application {
         id_user=id;}
     public static String getId_user(){
         return Integer.toString(id_user);}
+
+    public static String getTema() {
+        return tema;
+    }
+
+    public static void setTema(String tema) {
+        Client.tema = tema;
+    }
 
     public static void Disconnect() {
         try {
@@ -66,7 +75,7 @@ public class Client extends Application {
         FXMLLoader loader = new FXMLLoader(Client.class.getResource("/Window/LogInWindow.fxml"));
         Parent root =  loader.load();
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminOrdersTableController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminOrderController">
     <children>
         <TableView fx:id="Table" layoutX="63.0" layoutY="54.0" prefHeight="250.0" prefWidth="450.0">
             <columns>
@@ -32,6 +32,6 @@
             </items>
         </ComboBox>
         <Button fx:id="changeButton" layoutX="280.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="изменить" />
-        <Label layoutX="139.0" layoutY="312.0" prefHeight="17.0" prefWidth="174.0" />
+        <Label fx:id="MessageLabel" layoutX="139.0" layoutY="312.0" prefHeight="17.0" prefWidth="174.0" />
     </children>
 </AnchorPane>
