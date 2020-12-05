@@ -54,12 +54,12 @@ public class ShowBasketController implements NewScreen{
     void initialize() {
         showBasket();
         backButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/ClientMainWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/ClientMainWindow.fxml");
         });
         deleteBasketButton.setOnAction(actionEvent -> {
             String idBasket=deleteIdTF.getText().trim();
             if (idBasket.matches("\\d+")==false || Integer.parseInt(idBasket)<0) {
-                String message = "Basket,deleteBasket," + idBasket;
+                String message = "Basket_deleteBasket_" + idBasket;
                 try {
                     Client.os.writeObject(message);
                     message = (String) Client.is.readObject();
@@ -72,7 +72,7 @@ public class ShowBasketController implements NewScreen{
             }
         });
         OrderButton.setOnAction(actionEvent -> {
-            String  message="Order,addToOrder,"+Client.getId_user();
+            String  message="Order_addToOrder_"+Client.getId_user();
             try {
                 Client.os.writeObject(message);
                 message= (String) Client.is.readObject();
@@ -80,9 +80,9 @@ public class ShowBasketController implements NewScreen{
                 e.printStackTrace();
             }
             if (message.equals("success")) {
-                openOrderWindow();
+                openSecondWin(backButton,"/Window/OrderWindow.fxml");
                 saveFile();
-                message="Basket,deleteAll,"+Client.getId_user();
+                message="Basket_deleteAll_"+Client.getId_user();
                 try {
                     Client.os.writeObject(message);
                     message= (String) Client.is.readObject();
@@ -114,7 +114,7 @@ public class ShowBasketController implements NewScreen{
 
     public void showBasket() {
         try {
-            String clientMessage = "Basket,ShowBasket,"+Client.getId_user();
+            String clientMessage = "Basket_ShowBasket_"+Client.getId_user();
             Client.os.writeObject(clientMessage);
             List<BasketEntity> list=(List<BasketEntity>)Client.is.readObject();
             ObservableList<BasketEntity> baskets = FXCollections.observableArrayList();
@@ -130,24 +130,6 @@ public class ShowBasketController implements NewScreen{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    public void closeAndOpenScene(String window) {
-        backButton.getScene().getWindow().hide();
-        openNewScene(window);
-    }
-    public void openOrderWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/OrderWindow.fxml"));
-        Scene newScene;
-        try {
-            newScene = new Scene(loader.load());
-        } catch (IOException ex) {
-            return;
-        }
-        Stage inputStage = new Stage();
-        inputStage.initOwner(OrderButton.getScene().getWindow());
-        inputStage.setScene(newScene);
-        inputStage.show();
     }
 }
 

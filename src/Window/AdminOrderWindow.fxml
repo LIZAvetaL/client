@@ -12,17 +12,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminOrderController">
     <children>
-        <TableView fx:id="Table" layoutX="63.0" layoutY="54.0" prefHeight="250.0" prefWidth="450.0">
+        <TableView fx:id="Table" layoutX="61.0" layoutY="40.0" prefHeight="319.0" prefWidth="329.0">
             <columns>
                 <TableColumn fx:id="OrderNumber" prefWidth="94.6666259765625" text="Номер заказа" />
                 <TableColumn fx:id="Price" prefWidth="101.3333740234375" text="Стоимость" />
-                <TableColumn fx:id="Amount" prefWidth="116.66664123535156" text="Количество" />
                 <TableColumn fx:id="Status" prefWidth="131.33331298828125" text="Статус заказа" />
             </columns>
         </TableView>
-        <Button fx:id="BackButton" layoutX="434.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Назад" />
-        <TextField fx:id="idOrder" layoutX="63.0" layoutY="339.0" prefHeight="25.0" prefWidth="63.0" promptText="id заказа" />
-        <ComboBox fx:id="orderStatus" layoutX="145.0" layoutY="339.0" prefHeight="25.0" prefWidth="113.0" promptText="статус заказа">
+        <Button fx:id="BackButton" layoutX="500.0" layoutY="28.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Назад" />
+        <TextField fx:id="idOrder" layoutX="400.0" layoutY="125.0" prefHeight="25.0" prefWidth="63.0" promptText="id заказа" />
+        <ComboBox fx:id="orderStatus" layoutX="471.0" layoutY="125.0" prefHeight="25.0" prefWidth="113.0" promptText="статус заказа">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Подтвержден" />
@@ -31,7 +30,7 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <Button fx:id="changeButton" layoutX="280.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="изменить" />
+        <Button fx:id="changeButton" layoutX="500.0" layoutY="166.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="изменить" />
         <Label fx:id="MessageLabel" layoutX="139.0" layoutY="312.0" prefHeight="17.0" prefWidth="174.0" />
     </children>
 </AnchorPane>

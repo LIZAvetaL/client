@@ -41,7 +41,7 @@ public class AddReviewController {
                 String review= reviewArea.getText();
                 if (review.length()>500) MessageLabel.setText("Отзыв первышает 500 символов.");
                 else {
-                    String message="Review,addReview,"+Client.getId_user()+","+product.getId_product()+","+review;
+                    String message="Review_addReview_"+Client.getId_user()+"_"+product.getId_product()+"_"+review;
                     try {
                         Client.os.writeObject(message);
                         message= (String) Client.is.readObject();

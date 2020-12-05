@@ -59,15 +59,15 @@ public class ReviewController implements NewScreen {
     void initialize() {
         showProduct();
         backButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/ClientMainWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/ClientMainWindow.fxml");
         });
         showReview.setOnAction(actionEvent -> {
             String idProduct=ProductChoiceTF.getText().trim();
             if(idProduct!=null){
-                String message="Review,showReviews,"+idProduct;
+                String message="Review_showReviews_"+idProduct;
                 try {
                     Client.os.writeObject(message);
-                    openSecondWin("/Window/ShowReviewsWindow.fxml");
+                    openSecondWin(backButton,"/Window/ShowReviewsWindow.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -77,10 +77,10 @@ public class ReviewController implements NewScreen {
         addReview.setOnAction(actionEvent -> {
             String idProduct=ProductChoiceTF.getText().trim();
             if(idProduct!=null){
-                String message="Product,findProductByID,"+idProduct;
+                String message="Product_findProductByID_"+idProduct;
                 try {
                     Client.os.writeObject(message);
-                    openSecondWin("/Window/AddReviewWindow.fxml");
+                    openSecondWin(backButton,"/Window/AddReviewWindow.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +90,7 @@ public class ReviewController implements NewScreen {
     }
     public void showProduct(){
         try {
-            String clientMessage = "Product,ShowProduct";
+            String clientMessage = "Product_ShowProduct";
             Client.os.writeObject(clientMessage);
             List<ProductEntity> list= (List<ProductEntity>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
@@ -105,23 +105,5 @@ public class ReviewController implements NewScreen {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-    public void closeAndOpenScene(String window)
-    {
-        Product.getScene().getWindow().hide();
-        openNewScene(window);
-    }
-    private void openSecondWin(String win) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(win));
-        Scene newScene;
-        try {
-            newScene = new Scene(loader.load());
-        } catch (IOException ex) {
-            return;
-        }
-        Stage inputStage = new Stage();
-        inputStage.initOwner(backButton.getScene().getWindow());
-        inputStage.setScene(newScene);
-        inputStage.show();
     }
 }

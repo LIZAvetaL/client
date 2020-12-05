@@ -65,7 +65,7 @@ public class AdminProductController implements NewScreen{
         showProduct();
         deleteButton.setOnAction(actionEvent -> {
             String deleteId= idTF.getText();
-            String message="Product,deleteProduct,"+deleteId;
+            String message="Product_deleteProduct_"+deleteId;
             try {
                 Client.os.writeObject(message);
                 message= (String) Client.is.readObject();
@@ -75,42 +75,28 @@ public class AdminProductController implements NewScreen{
             }
         });
         backButton.setOnAction(actionEvent ->{
-            closeAndOpenScene("/Window/AdminMainWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/AdminMainWindow.fxml");
         } );
         addButton.setOnAction(actionEvent -> {
-            openSecondWin("/Window/AddProductWindow.fxml");
+            openSecondWin(backButton,"/Window/AddProductWindow.fxml");
         });
         editButton.setOnAction(actionEvent -> {
             String deleteId= idTF.getText().trim();
             if (deleteId!=null || Integer.parseInt(deleteId)>0){
-            String message="Product,editProduct,"+deleteId;
+            String message="Product_editProduct_"+deleteId;
             try {
                 Client.os.writeObject(message);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            openSecondWin("/Window/EditProductWindow.fxml");
+            openSecondWin(backButton,"/Window/EditProductWindow.fxml");
             }
         });
     }
 
-    private void openSecondWin(String win) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(win));
-        Scene newScene;
-        try {
-            newScene = new Scene(loader.load());
-        } catch (IOException ex) {
-            return;
-        }
-        Stage inputStage = new Stage();
-        inputStage.initOwner(backButton.getScene().getWindow());
-        inputStage.setScene(newScene);
-        inputStage.show();
-    }
-
     public void showProduct(){
         try {
-            String clientMessage = "Product,ShowProduct";
+            String clientMessage = "Product_ShowProduct";
             Client.os.writeObject(clientMessage);
             List<ProductEntity> list= (List<ProductEntity>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
@@ -126,8 +112,5 @@ public class AdminProductController implements NewScreen{
             e.printStackTrace();
         }
     }
-    public void closeAndOpenScene(String window){
-        backButton.getScene().getWindow().hide();
-        openNewScene(window);
-    }
+
 }

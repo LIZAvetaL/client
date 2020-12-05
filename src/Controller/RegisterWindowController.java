@@ -40,16 +40,16 @@ public class RegisterWindowController implements NewScreen {
             String login = LoginField.getText();
             String Password = PasswordField.getText();
 
-            String clM = "User,checkLogin," + login;
+            String clM = "User_checkLogin_" + login;
             try {
                 Client.os.writeObject(clM);
                 String mes = (String)Client.is.readObject();
                 if(mes.equals("success"))
                 {
-                    String clientMessage = "User,addClient,"+ login + "," + Password;
+                    String clientMessage = "User_addClient_"+ login + "_" + Password;
                         Client.os.writeObject(clientMessage);
                         mes= (String) Client.is.readObject();;
-                    closeAndOpenScene("/Window/LogInWindow.fxml");
+                    closeAndOpenScene(SignUpButton,"/Window/LogInWindow.fxml");
                 }
                 else
                 {
@@ -64,11 +64,5 @@ public class RegisterWindowController implements NewScreen {
 
         });
 
-    }
-
-    public void closeAndOpenScene(String window)
-    {
-        SignUpButton.getScene().getWindow().hide();
-        openNewScene(window);
     }
 }

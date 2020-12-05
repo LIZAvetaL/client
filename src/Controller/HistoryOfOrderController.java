@@ -46,12 +46,12 @@ public class HistoryOfOrderController implements NewScreen {
     void initialize() {
        showOrder();
        BackButton.setOnAction(actionEvent ->{
-           closeAndOpenScene("/Window/ClientMainWindow.fxml");
+           closeAndOpenScene(BackButton,"/Window/ClientMainWindow.fxml");
        });
     }
 
     private void showOrder() {
-        String message="Order,showOrder,"+Client.getId_user();
+        String message="Order_showOrder_"+Client.getId_user();
         try {
             Client.os.writeObject(message);
             List<OrdersEntity> list = (List<OrdersEntity>) Client.is.readObject();
@@ -65,10 +65,6 @@ public class HistoryOfOrderController implements NewScreen {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-    public void closeAndOpenScene(String window) {
-        BackButton.getScene().getWindow().hide();
-        openNewScene(window);
     }
 }
 

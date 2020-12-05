@@ -76,6 +76,7 @@ public class Client extends Application {
         Parent root =  loader.load();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.getScene().getStylesheets().add(Client.getTema());
         primaryStage.show();
     }
 

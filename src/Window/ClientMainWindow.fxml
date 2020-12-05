@@ -10,5 +10,6 @@
       <Button fx:id="HistoryOrder" layoutX="150.0" layoutY="200.0" mnemonicParsing="false" text="История заказов" />
       <Button fx:id="backButton" layoutX="297.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Назад" />
       <Button fx:id="reviewButton" layoutX="179.0" layoutY="276.0" mnemonicParsing="false" text="Отзывы" />
+      <Button fx:id="changePasswordButton" layoutX="297.0" layoutY="276.0" mnemonicParsing="false" text="Сменить пароль" />
    </children>
 </AnchorPane>

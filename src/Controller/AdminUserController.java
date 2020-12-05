@@ -56,7 +56,7 @@ public class AdminUserController implements NewScreen{
         showUser();
         deleteUserButton.setOnAction(actionEvent -> {
             String deleteId= idTF.getText();
-            String message="User,deleteUser,"+deleteId;
+            String message="User_deleteUser_"+deleteId;
             try {
                 Client.os.writeObject(message);
                 message= (String) Client.is.readObject();
@@ -66,16 +66,16 @@ public class AdminUserController implements NewScreen{
             }
         });
         addAdminButton.setOnAction(actionEvent -> {
-            openAddAdminWindow();
+            openSecondWin(backButton,"/Window/AddAdminWindow.fxml");
         });
         backButton.setOnAction(actionEvent ->{
-            closeAndOpenScene("/Window/AdminMainWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/AdminMainWindow.fxml");
         } );
     }
 
     private void showUser() {
         try {
-        String clientMessage = "User,showUser";
+        String clientMessage = "User_showUser";
         Client.os.writeObject(clientMessage);
         List<UsersEntity> list = (List<UsersEntity>) Client.is.readObject();
         ObservableList<UsersEntity> users = FXCollections.observableArrayList();
@@ -88,23 +88,6 @@ public class AdminUserController implements NewScreen{
     } catch (IOException |ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-    public void closeAndOpenScene(String window){
-        backButton.getScene().getWindow().hide();
-        openNewScene(window);
-    }
-    public void openAddAdminWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/AddAdminWindow.fxml"));
-        Scene newScene;
-        try {
-            newScene = new Scene(loader.load());
-        } catch (IOException ex) {
-            return;
-        }
-        Stage inputStage = new Stage();
-        inputStage.initOwner(backButton.getScene().getWindow());
-        inputStage.setScene(newScene);
-        inputStage.show();
     }
 }
 

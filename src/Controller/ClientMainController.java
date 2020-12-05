@@ -28,6 +28,8 @@ public class ClientMainController implements NewScreen{
     private Button HistoryOrder;
     @FXML
     private Button reviewButton;
+    @FXML
+    private Button changePasswordButton;
 
     @FXML
     private Button backButton;
@@ -35,28 +37,26 @@ public class ClientMainController implements NewScreen{
     @FXML
     void initialize() {
         Product.setOnAction(event -> {
-            closeAndOpenScene("/Window/ShowProductWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/ShowProductWindow.fxml");
         });
         Basket.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/ShowBasketWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/ShowBasketWindow.fxml");
         });
         HistoryOrder.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/HistoryOfOrderWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/HistoryOfOrderWindow.fxml");
         });
         reviewButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/ReviewsWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/ReviewsWindow.fxml");
+        });
+        changePasswordButton.setOnAction(actionEvent -> {
+            openSecondWin(backButton,"/Window/ChangePasswordWindow.fxml");
         });
 
 
         backButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/LogInWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/LogInWindow.fxml");
         });
 
-    }
-    public void closeAndOpenScene(String window)
-    {
-        Product.getScene().getWindow().hide();
-        openNewScene(window);
     }
 }
 

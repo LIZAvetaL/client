@@ -44,7 +44,7 @@ public class AddProductController {
         String Price=price.getText().trim();
         if(Type==null || Name==null ||Amount==null||Price==null || Amount.matches("\\d+")==false|| Price.matches("\\d+")==false) MessageLabel.setText("Ошибка.Повторите ввод");
         else {
-            String message ="Product,addProduct,"+ Type + "," + Name + "," + Amount + "," + Price;
+            String message ="Product_addProduct_"+ Type + "_" + Name + "_" + Amount + "_" + Price;
             try {
                 Client.os.writeObject(message);
                  message= (String) Client.is.readObject();

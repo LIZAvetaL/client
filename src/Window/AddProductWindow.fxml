@@ -21,7 +21,6 @@
                   <String  fx:value="Планшет" />
                   <String  fx:value="Ноутбук" />
                   <String  fx:value="Принтер" />
-                  <String  fx:value="Часы" />
               </FXCollections>
           </items>
       </ComboBox>

@@ -20,18 +20,12 @@ public class StatisticsController implements NewScreen {
     void initialize() {
         showStatistics();
         backButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/AdminMainWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/AdminMainWindow.fxml");
         });
     }
-
-    private void closeAndOpenScene(String s) {
-        backButton.getScene().getWindow().hide();
-        openNewScene(s);
-    }
-
     public void showStatistics() {
         try {
-            String clientMessage = "Product,showTypes";
+            String clientMessage = "Product_showTypes";
             Client.os.writeObject(clientMessage);
             ArrayList<String> list = (ArrayList<String>) Client.is.readObject();
             ObservableList<PieChart.Data> pieChartList = FXCollections.observableArrayList(

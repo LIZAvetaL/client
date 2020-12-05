@@ -56,7 +56,7 @@ public class AdminOrderController implements NewScreen {
     void initialize() {
         showOrder();
         BackButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/AdminMainWindow.fxml");
+            closeAndOpenScene(BackButton,"/Window/AdminMainWindow.fxml");
         });
         changeButton.setOnAction(actionEvent -> {
             changeStatus();
@@ -67,7 +67,7 @@ public class AdminOrderController implements NewScreen {
     private void changeStatus(){
         String idOrderTF=idOrder.getText().trim();
         String statusOrderCB = orderStatus.getValue().trim();
-        String message="Order,changeStatus,"+idOrderTF+","+statusOrderCB;
+        String message="Order_changeStatus_"+idOrderTF+"_"+statusOrderCB;
         try {
             Client.os.writeObject(message);
             message= (String) Client.is.readObject();
@@ -83,7 +83,7 @@ public class AdminOrderController implements NewScreen {
     }
 
     private void showOrder() {
-        String message="Order,showOrderAdmin";
+        String message="Order_showOrderAdmin";
         try {
             Client.os.writeObject(message);
             List<OrdersEntity> list = (List<OrdersEntity>) Client.is.readObject();
@@ -98,8 +98,5 @@ public class AdminOrderController implements NewScreen {
             e.printStackTrace();
         }
     }
-    public void closeAndOpenScene(String window) {
-        BackButton.getScene().getWindow().hide();
-        openNewScene(window);
-    }
+
 }

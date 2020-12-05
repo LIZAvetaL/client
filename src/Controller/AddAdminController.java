@@ -34,12 +34,12 @@ public class AddAdminController {
         String login = loginTF.getText().trim();
         String password = passwordTF.getText().trim();
         if(login!=null && password!=null) {
-            String message = "User,checkLogin," + login;
+            String message = "User_checkLogin_" + login;
             try {
                 Client.os.writeObject(message);
                 message = (String) Client.is.readObject();
                 if (message.equals("success")) {
-                    String clientMessage = "User,addAdmin," + login + "," + password;
+                    String clientMessage = "User_addAdmin_" + login + "_" + password;
                     try {
                         Client.os.writeObject(clientMessage);
                         message = (String) Client.is.readObject();

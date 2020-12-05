@@ -27,22 +27,22 @@ public class ShowProductController implements NewScreen{
     private URL location;
 
     @FXML
-    private TableView<ProductEntity> Product;
+    protected TableView<ProductEntity> Product;
 
     @FXML
-    private TableColumn<ProductEntity, Integer> id;
+    protected TableColumn<ProductEntity, Integer> id;
 
     @FXML
-    private TableColumn<ProductEntity, String> type;
+    protected TableColumn<ProductEntity, String> type;
 
     @FXML
-    private TableColumn<ProductEntity, String> name;
+    protected TableColumn<ProductEntity, String> name;
 
     @FXML
-    private TableColumn<ProductEntity, Double> price;
+    protected TableColumn<ProductEntity, Double> price;
 
     @FXML
-    private TableColumn<ProductEntity, Integer> amount;
+    protected TableColumn<ProductEntity, Integer> amount;
 
     @FXML
     private TextField TextFieldProductChoice;
@@ -55,14 +55,23 @@ public class ShowProductController implements NewScreen{
     @FXML
     private Button backButton;
     @FXML
+    private Button searchProductButton;
+    @FXML
     private TextField AmountTF;
+    @FXML
+    private ComboBox<String> typeTF;
+
+    @FXML
+    private TextField OtpriceTF;
+    @FXML
+    private TextField DopriceTF;
 
 
     @FXML
     void initialize()  {
         showProduct();
         backButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/ClientMainWindow.fxml");
+            closeAndOpenScene(backButton,"/Window/ClientMainWindow.fxml");
         });
         AddToBasket.setOnAction(event -> {
             String IdProductText = TextFieldProductChoice.getText().trim();
@@ -70,7 +79,7 @@ public class ShowProductController implements NewScreen{
             if (IdProductText.matches("\\d+")==false || amountProductText.matches("\\d+")==false || Integer.parseInt(amountProductText)<0 || Integer.parseInt(IdProductText)<0)
                LabelMessage.setText("Ошибка, повторите ввод.");
             else{
-                String message="Basket,addToBasket,"+IdProductText+","+amountProductText+","+Client.getId_user();
+                String message="Basket_addToBasket_"+IdProductText+"_"+amountProductText+"_"+Client.getId_user();
                 try {
                     Client.os.writeObject(message);
                     message= (String) Client.is.readObject();
@@ -84,16 +93,29 @@ public class ShowProductController implements NewScreen{
 
             }
         });
+        searchProductButton.setOnAction(actionEvent -> {
+            //openSecondWin(backButton_"/Window/SearchProductWindow.fxml");
+            String type=typeTF.getValue();
+            String beginPrice=OtpriceTF.getText().trim();
+            String endPrice=DopriceTF.getText().trim();
+            if (type==null || beginPrice==null|| beginPrice.matches("\\d+")==false|| endPrice==null|| endPrice.matches("\\d+")==false) LabelMessage.setText("Заполните поля.");
+            else {
+                String message="Product_findProductByTypeAndPrice_"+type+"_"+beginPrice+"_"+endPrice;
+                try {
+                    Client.os.writeObject(message);
+                    showSearchProduct();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    private void closeAndOpenScene(String window) {
-        backButton.getScene().getWindow().hide();
-        openNewScene(window);
-    }
+
 
     public void showProduct(){
         try {
-            String clientMessage = "Product,ShowProduct";
+            String clientMessage = "Product_ShowProduct";
             Client.os.writeObject(clientMessage);
             List<ProductEntity>list= (List<ProductEntity>) Client.is.readObject();
             ObservableList<ProductEntity> products = FXCollections.observableArrayList();
@@ -110,6 +132,27 @@ public class ShowProductController implements NewScreen{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public void showSearchProduct() {
+        List<ProductEntity> list=null;
+        try {
+            list= (List<ProductEntity>) Client.is.readObject();
+        } catch (IOException |ClassNotFoundException e) {
+            e.printStackTrace();}
+        ObservableList<ProductEntity> products = FXCollections.observableArrayList();
+        for (ProductEntity product:list)
+            products.add(product);
+        try {
+            id.setCellValueFactory(new PropertyValueFactory<>("id_product"));
+            type.setCellValueFactory(new PropertyValueFactory<>("type"));
+            name.setCellValueFactory(new PropertyValueFactory<>("name"));
+            price.setCellValueFactory(new PropertyValueFactory<>("price"));
+            amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            Product.setItems(products);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

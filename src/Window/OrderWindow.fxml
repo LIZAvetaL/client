@@ -13,7 +13,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="OkButton" layoutX="182.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Ok" />
+      <Button fx:id="OkButton" layoutX="165.0" layoutY="132.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Ok" />
       <Text layoutX="43.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сумма вашего заказа: " wrappingWidth="206.8034439086914">
          <font>
             <Font size="17.0" />
@@ -24,5 +24,6 @@
             <Font size="17.0" />
          </font>
       </Label>
+      <Text layoutX="43.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Все сведенья о заказе записаны в файл." />
    </children>
 </AnchorPane>

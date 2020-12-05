@@ -57,7 +57,7 @@ public class LogInController implements NewScreen{
             String login = LoginField.getText().trim();
             String password = PasswordField.getText().trim();
             if (UserLogInWindow.isSelected() && !AdminLogInWindow.isSelected() && login!=null&& password!=null) {
-                String clientMessage = "User,"+"checkSingInClient," + login + "," + password;
+                String clientMessage = "User_"+"checkSingInClient_" + login + "_" + password;
                 try {
                     Client.os.writeObject(clientMessage);
                     message = (String) Client.is.readObject();
@@ -68,10 +68,10 @@ public class LogInController implements NewScreen{
                     CautionLabel.setText("Такого пользователя не существует!");
                 else {
                     Client.setId_user(Integer.parseInt(message));
-                    closeAndOpenScene("/Window/ClientMainWindow.fxml");
+                    closeAndOpenScene(dark,"/Window/ClientMainWindow.fxml");
                 }
             } else if (AdminLogInWindow.isSelected() && !UserLogInWindow.isSelected()) {
-                String clientMessage = "User,checkSingInAdmin," + login + "," + password;
+                String clientMessage = "User_checkSingInAdmin_" + login + "_" + password;
 
                 try {
                     Client.os.writeObject(clientMessage);
@@ -83,7 +83,7 @@ public class LogInController implements NewScreen{
                 }
 
                 if (message.equals("successAdmin")) {
-                    closeAndOpenScene("/Window/AdminMainWindow.fxml");
+                    closeAndOpenScene(dark,"/Window/AdminMainWindow.fxml");
                 } else if (message.equals("fail"))
                     CautionLabel.setText("Такого администратора не существует!");
             } else
@@ -93,39 +93,20 @@ public class LogInController implements NewScreen{
         });
         LoginSignUpButton.setOnAction(event ->
         {
-            if(UserLogInWindow.isSelected() && !AdminLogInWindow.isSelected()) {
-                closeAndOpenScene("/Window/RegisterWindow.fxml");
-            } else if (AdminLogInWindow.isSelected() && !UserLogInWindow.isSelected())
-                CautionLabel.setText("Вы можете зарегистрироваться только как пользователь!");
-            else
-                CautionLabel.setText("Пожалуйста, выберите администратор либо пользователь!");
+
+                closeAndOpenScene(dark,"/Window/RegisterWindow.fxml");
+
         });
         dark.setOnAction(actionEvent -> {
             Client.setTema("/Window/dark.css");
-            closeAndOpenScene("/Window/LogInWindow.fxml");
+            closeAndOpenScene(dark,"/Window/LogInWindow.fxml");
         });
         light.setOnAction(actionEvent -> {
             Client.setTema("/Window/light.css");
-            closeAndOpenScene("/Window/LogInWindow.fxml");
+            closeAndOpenScene(dark,"/Window/LogInWindow.fxml");
         });
     }
-    public void openSecondWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Window/OrderWindow.fxml"));
-        Scene newScene;
-        try {
-            newScene = new Scene(loader.load());
-        } catch (IOException ex) {
-            return;
-        }
-        Stage inputStage = new Stage();
-        inputStage.initOwner(LoginSignUpButton.getScene().getWindow());
-        inputStage.setScene(newScene);
-        inputStage.show();
-    }
-    public void closeAndOpenScene(String window){
-        LoginSignUpButton.getScene().getWindow().hide();
-        openNewScene(window);
-    }
+
 }
 
 

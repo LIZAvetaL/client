@@ -33,21 +33,17 @@ public class AdminMainController implements NewScreen {
     @FXML
     void initialize() {
         userButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/AdminUserWindow.fxml");
+            closeAndOpenScene(userButton,"/Window/AdminUserWindow.fxml");
         });
         ProductButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/AdminProductWindow.fxml");
+            closeAndOpenScene(userButton,"/Window/AdminProductWindow.fxml");
         });
         OrderButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/AdminOrderWindow.fxml");
+            closeAndOpenScene(userButton,"/Window/AdminOrderWindow.fxml");
         });
         statisticsButton.setOnAction(actionEvent -> {
-            closeAndOpenScene("/Window/Statistics.fxml");
+            closeAndOpenScene(userButton,"/Window/Statistics.fxml");
         });
-    }
-    public void closeAndOpenScene(String window){
-        userButton.getScene().getWindow().hide();
-        openNewScene(window);
     }
 
 }
